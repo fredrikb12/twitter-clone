@@ -4,24 +4,56 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Outlet } from "react-router-dom";
 import SignIn from "./components/SignIn";
 import SignOut from "./components/SignOut";
+import uniqid from "uniqid";
+import {
+  collection,
+  doc,
+  getDoc,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
+import { getDB } from "./firebase";
 
 function App() {
   const [user] = useAuthState(getAuth());
 
-  console.log(user);
-
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(getAuth().currentUser);
-  }, []);
+  }, [user]);*/
 
   function initFirebaseAuth() {
     //TODO: authStateObserver function
-    onAuthStateChanged(getAuth(), (user) => {
-      if(user) {
-        
+    onAuthStateChanged(getAuth(), async (user) => {
+      if (user) {
+        const db = getDB();
+        //const usersRef = collection(getDB(), "users");
+        // const q = query(usersRef, where("uid", "==", user.uid))
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          console.log("doc data:", userSnap.data());
+        } else {
+          await setDoc(doc(db, "users", user.uid), {
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            uid: user.uid,
+            tag: uniqid(),
+            tweets: [],
+            following: [],
+          });
+          const data = await getDoc(userRef);
+          console.log(data.data());
+        }
+      } else {
+        console.log("no user");
       }
     });
   }
+
+  useEffect(() => {
+    initFirebaseAuth();
+  }, []);
 
   // Triggers when the auth state change for instance when the user signs-in or signs-out.
   function authStateObserver(user) {
