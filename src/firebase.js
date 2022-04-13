@@ -19,6 +19,7 @@ import {
   doc,
   serverTimestamp,
 } from "firebase/firestore";
+import "firebase/auth";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -37,9 +38,15 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
 
 const getAppAuth = () => {
-  return null;
+  return auth;
 };
+
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+
+export const signInWithGoogle = () => signInWithPopup(auth, provider);
 
 export { getAppAuth };

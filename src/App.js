@@ -1,4 +1,5 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Outlet } from "react-router-dom";
 import SignIn from "./components/SignIn";
@@ -7,9 +8,19 @@ import SignOut from "./components/SignOut";
 function App() {
   const [user] = useAuthState(getAuth());
 
+  console.log(user);
+
+  useEffect(() => {
+    console.log(getAuth().currentUser);
+  }, []);
+
   function initFirebaseAuth() {
     //TODO: authStateObserver function
-    onAuthStateChanged(getAuth(), authStateObserver);
+    onAuthStateChanged(getAuth(), (user) => {
+      if(user) {
+        
+      }
+    });
   }
 
   // Triggers when the auth state change for instance when the user signs-in or signs-out.
@@ -49,8 +60,9 @@ function App() {
 
   return (
     <div>
-      {!user && <SignIn />}
-      {user && <Outlet />}
+      {user ? null : <SignIn />}
+      <h1 onClick={() => console.log(user)}>App component</h1>
+      {user && <Outlet context={[user]} />}
     </div>
   );
 }
