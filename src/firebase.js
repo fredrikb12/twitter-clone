@@ -49,9 +49,13 @@ const getDB = () => {
   return db;
 };
 
+const isUserSignedIn = () => {
+  return !!getAuth().currentUser;
+};
+
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
 
-export { getAppAuth, getDB };
+export { getAppAuth, getDB, isUserSignedIn };

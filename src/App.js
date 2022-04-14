@@ -18,10 +18,6 @@ import { getDB } from "./firebase";
 function App() {
   const [user] = useAuthState(getAuth());
 
-  /*useEffect(() => {
-    console.log(getAuth().currentUser);
-  }, [user]);*/
-
   function initFirebaseAuth() {
     //TODO: authStateObserver function
     onAuthStateChanged(getAuth(), async (user) => {
@@ -29,10 +25,10 @@ function App() {
         const db = getDB();
         //const usersRef = collection(getDB(), "users");
         // const q = query(usersRef, where("uid", "==", user.uid))
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
-          console.log("doc data:", userSnap.data());
+        const usersRef = doc(db, "users", user.uid);
+        const usersSnap = await getDoc(usersRef);
+        if (usersSnap.exists()) {
+          console.log("doc data:", usersSnap.data());
         } else {
           await setDoc(doc(db, "users", user.uid), {
             displayName: user.displayName,
@@ -41,8 +37,9 @@ function App() {
             tag: uniqid(),
             tweets: [],
             following: [],
+            followers: [],
           });
-          const data = await getDoc(userRef);
+          const data = await getDoc(usersRef);
           console.log(data.data());
         }
       } else {

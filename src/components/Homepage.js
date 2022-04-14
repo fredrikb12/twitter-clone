@@ -1,31 +1,44 @@
-import React, { useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { getDB } from "../firebase";
+import CreateTweet from "./CreateTweet";
 import SignOut from "./SignOut";
+import StyledFlexColContainer from "./styled/StyledFlexColContainer";
+import StyledFlexRowContainer from "./styled/StyledFlexRowContainer";
+import StyledHomepageContainer from "./styled/StyledHomepageContainer";
+import StyledLeftSidebar from "./styled/StyledLeftSidebar";
+import StyledMainContainer from "./styled/StyledMainContainer";
+import StyledRightSidebar from "./styled/StyledRightSidebar";
 
 function Homepage() {
   const [user] = useOutletContext();
-  const [tweet, setTweet] = useState("");
+  const [tweets, setTweets] = useState([]);
 
-  function handleInput(e) {
-    setTweet(e.target.value);
-  }
+  useEffect(() => {
+    async function loadTweets() {
+      const usersRef = collection(getDB(), "users");
+      const q = query(usersRef, where("followers", "array-contains", user.uid));
 
-  function handleTweet(e) {
-    e.preventDefault();
-    console.log(tweet);
-  }
+      const qSnap = await getDocs(q);
+      qSnap.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data().tweets);
+      });
+    }
+    loadTweets();
+  }, [user.uid]);
 
   return (
-    <main>
-      <form>
-        <label>
-          Create Tweet
-          <textarea value={tweet} onChange={handleInput} />
-        </label>
-        <button onClick={handleTweet}>Tweet</button>
-      </form>
-      <SignOut />
-    </main>
+    <StyledHomepageContainer>
+      <StyledLeftSidebar></StyledLeftSidebar>
+      <StyledMainContainer>
+        <div>
+          <CreateTweet />
+          <SignOut />
+        </div>
+      </StyledMainContainer>
+      <StyledRightSidebar></StyledRightSidebar>
+    </StyledHomepageContainer>
   );
 }
 
