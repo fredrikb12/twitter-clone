@@ -10,10 +10,15 @@ import StyledHomepageContainer from "./styled/StyledHomepageContainer";
 import StyledLeftSidebar from "./styled/StyledLeftSidebar";
 import StyledMainContainer from "./styled/StyledMainContainer";
 import StyledRightSidebar from "./styled/StyledRightSidebar";
+import TweetsFeed from "./TweetsFeed";
 
 function Homepage() {
   const [user] = useOutletContext();
   const [tweets, setTweets] = useState([]);
+
+  useEffect(() => {
+    console.log("tweets: ", tweets);
+  }, [tweets]);
 
   useEffect(() => {
     async function loadTweets() {
@@ -21,8 +26,25 @@ function Homepage() {
       const q = query(usersRef, where("followers", "array-contains", user.uid));
 
       const qSnap = await getDocs(q);
+      const tweetData = [];
       qSnap.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data().tweets);
+        const tweets = doc.data().tweets.map((tweet) => {
+          return {
+            ...tweet,
+            authorName: doc.data().displayName,
+            userName: doc.data().tag,
+          };
+        });
+        const data = {};
+        /*data.authorName = doc.data().displayName;
+        data.userName = doc.data().tag;
+        data.tweets = [...doc.data().tweets];
+        console.log("data: ", data);*/
+        console.log(doc.id, " => ", tweets);
+        tweetData.push(...tweets);
+      });
+      setTweets(() => {
+        return [...tweetData];
       });
     }
     loadTweets();
@@ -35,6 +57,7 @@ function Homepage() {
         <div>
           <CreateTweet />
           <SignOut />
+          <TweetsFeed tweetData={tweets} />
         </div>
       </StyledMainContainer>
       <StyledRightSidebar></StyledRightSidebar>
