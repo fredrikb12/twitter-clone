@@ -5,7 +5,6 @@ const StyledRightSidebar = styled.aside`
   flex-direction: column;
   width: 350px;
   min-height: 100px;
-  height: 100%;
   background-color: palevioletred;
 
   @media (max-width: 1250px) {
