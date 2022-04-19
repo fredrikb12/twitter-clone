@@ -14,6 +14,10 @@ import {
   where,
 } from "firebase/firestore";
 import { getDB } from "./firebase";
+import StyledMainContainer from "./components/styled/StyledMainContainer";
+import StyledHomepageContainer from "./components/styled/StyledHomepageContainer";
+import StyledLeftSidebar from "./components/styled/StyledLeftSidebar";
+import StyledRightSidebar from "./components/styled/StyledRightSidebar";
 
 function App() {
   const [user] = useAuthState(getAuth());
@@ -38,6 +42,7 @@ function App() {
             tweets: [],
             following: [],
             followers: [],
+            bio: "",
           });
           const data = await getDoc(usersRef);
           console.log(data.data());
@@ -86,14 +91,21 @@ function App() {
     signInButtonElement.removeAttribute('hidden');*/
     }
   }
-
-  return (
-    <div>
-      {user ? null : <SignIn />}
-      <h1 onClick={() => console.log(user)}>App component</h1>
-      {user && <Outlet context={[user]} />}
-    </div>
-  );
+  if (user) {
+    return (
+      <StyledHomepageContainer>
+        <StyledLeftSidebar></StyledLeftSidebar>
+        <div>
+          <StyledMainContainer>
+            {user && <Outlet context={[user]} />}
+          </StyledMainContainer>
+        </div>
+        <StyledRightSidebar></StyledRightSidebar>
+      </StyledHomepageContainer>
+    );
+  } else {
+    return <SignIn />;
+  }
 }
 
 export default App;

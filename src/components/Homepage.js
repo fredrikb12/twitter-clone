@@ -51,17 +51,11 @@ function Homepage() {
   }, [user.uid]);
 
   return (
-    <StyledHomepageContainer>
-      <StyledLeftSidebar></StyledLeftSidebar>
-      <StyledMainContainer>
-        <div>
-          <CreateTweet />
-          <SignOut />
-          <TweetsFeed tweetData={tweets} />
-        </div>
-      </StyledMainContainer>
-      <StyledRightSidebar></StyledRightSidebar>
-    </StyledHomepageContainer>
+    <div>
+      <CreateTweet />
+      <SignOut />
+      <TweetsFeed tweetData={tweets} />
+    </div>
   );
 }
 
