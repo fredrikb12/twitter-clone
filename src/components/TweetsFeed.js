@@ -2,19 +2,17 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function TweetsFeed({ tweetData }) {
-  useEffect(() => {
+  /*useEffect(() => {
     async function getUserNames() {
-      if (tweetData && tweetData[0].tweets) {
+      if (tweetData && tweetData[0] && tweetData[0].tweets) {
         console.log(tweetData);
       }
     }
     getUserNames();
-  }, [tweetData]);
+  }, [tweetData]);*/
 
   if (tweetData) {
-    console.log("tweetData: ", tweetData);
     return tweetData.map((tweet, index) => {
-      console.log(tweet);
       return (
         <div key={index}>
           <Link to={`/profiles/${tweet.userName}`}><p>{tweet.authorName}</p></Link>
@@ -29,9 +27,7 @@ function TweetsFeed({ tweetData }) {
 function convertSeconds(seconds) {
   const date = new Date(seconds * 1000);
   const returnD = formatDate(date);
-  console.log(returnD);
   return returnD;
-  //return date;
 }
 
 function padTo2Digits(num) {
