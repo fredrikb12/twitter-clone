@@ -18,6 +18,7 @@ import StyledMainContainer from "./components/styled/StyledMainContainer";
 import StyledHomepageContainer from "./components/styled/StyledHomepageContainer";
 import StyledLeftSidebar from "./components/styled/StyledLeftSidebar";
 import StyledRightSidebar from "./components/styled/StyledRightSidebar";
+import RightSidebar from "./RightSidebar";
 
 function App() {
   const [user] = useAuthState(getAuth());
@@ -32,7 +33,6 @@ function App() {
         const usersRef = doc(db, "users", user.uid);
         const usersSnap = await getDoc(usersRef);
         if (usersSnap.exists()) {
-          console.log("doc data:", usersSnap.data());
         } else {
           await setDoc(doc(db, "users", user.uid), {
             displayName: user.displayName,
@@ -100,7 +100,9 @@ function App() {
             {user && <Outlet context={[user]} />}
           </StyledMainContainer>
         </div>
-        <StyledRightSidebar></StyledRightSidebar>
+        <StyledRightSidebar>
+          <RightSidebar user={user} />
+        </StyledRightSidebar>
       </StyledHomepageContainer>
     );
   } else {

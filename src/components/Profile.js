@@ -32,7 +32,6 @@ function Profile() {
       let data = [];
 
       qSnap.forEach((doc) => {
-        console.log(doc.data());
         const userData = doc.data();
         setisFollowed(() => {
           return userData.followers.includes(user.uid);
