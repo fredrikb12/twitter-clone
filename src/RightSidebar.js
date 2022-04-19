@@ -17,6 +17,9 @@ import { Link } from "react-router-dom";
 function RightSidebar({ user }) {
   const [suggestions, setSuggestions] = useState([]);
   const [key, setKey] = useState(user.uid);
+  useEffect(() => {
+    setKey(() => user.uid);
+  }, [user]);
 
   useEffect(() => {
     console.log(suggestions);
@@ -61,7 +64,7 @@ function RightSidebar({ user }) {
     }
 
     loadSuggestions();
-  }, [user.uid, suggestions.length]);
+  }, [user.uid, suggestions.length, key]);
 
   return (
     <div>
