@@ -14,7 +14,7 @@ import TweetsFeed from "./TweetsFeed";
 
 function Profile() {
   const [user] = useOutletContext();
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState([]);
   const [tweets, setTweets] = useState([]);
   const { userTag } = useParams();
 
@@ -30,13 +30,15 @@ function Profile() {
         console.log(doc.data());
         const userData = doc.data();
         setUserInfo(() => {
-          return {
-            bio: userData.bio,
-            displayName: userData.displayName,
-            followers: userData.followers.length,
-            following: userData.following.length,
-            tweets: userData.tweets.length,
-          };
+          return [
+            {
+              bio: userData.bio,
+              displayName: userData.displayName,
+              followers: userData.followers.length,
+              following: userData.following.length,
+              tweets: userData.tweets.length,
+            },
+          ];
         });
         const tweetData = doc.data().tweets.map((tweet) => {
           return {
@@ -68,23 +70,20 @@ function Profile() {
     loadUserInfo();
   }, [userTag]);
 
-  useEffect(() => {
-    console.log(tweets);
-  }, [tweets]);
-
-  let renderObj = [];
-  if (!!userInfo) {
-    let data = [];
-    data.push(<h1>{userInfo.displayName}</h1>);
-    data.push(<p>{userInfo.bio}</p>);
-    data.push(<p>followers: {userInfo.followers}</p>);
-    data.push(<p>following: {userInfo.following}</p>);
-    renderObj = data;
-  }
-
   return (
     <div>
-      <div>{renderObj}</div>
+      {userInfo[0]
+        ? userInfo.map((item, index) => {
+            return (
+              <div key={index}>
+                <h1>{item.displayName}</h1>
+                <p>{item.bio}</p>
+                <p>followers: {item.followers}</p>
+                <p>following: {item.following}</p>
+              </div>
+            );
+          })
+        : null}
       <TweetsFeed tweetData={tweets} />
     </div>
   );
