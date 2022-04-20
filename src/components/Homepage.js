@@ -53,7 +53,6 @@ function Homepage() {
   return (
     <div>
       <CreateTweet />
-      <SignOut />
       <TweetsFeed tweetData={tweets} />
     </div>
   );

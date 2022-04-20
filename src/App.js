@@ -97,6 +97,7 @@ function App() {
       <StyledHomepageContainer>
         <StyledLeftSidebar>
           <LeftSidebar user={user} />
+          <SignOut user={user} />
         </StyledLeftSidebar>
         <div>
           <StyledMainContainer>
