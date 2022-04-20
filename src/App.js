@@ -95,10 +95,7 @@ function App() {
   if (user) {
     return (
       <StyledHomepageContainer>
-        <StyledLeftSidebar>
           <LeftSidebar user={user} />
-          <SignOut user={user} />
-        </StyledLeftSidebar>
         <div>
           <StyledMainContainer>
             {user && <Outlet context={[user]} />}
