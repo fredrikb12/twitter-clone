@@ -14,10 +14,14 @@ function TweetsFeed({ tweetData }) {
   if (tweetData) {
     return tweetData.map((tweet, index) => {
       return (
-        <div key={index}>
-          <Link to={`/profiles/${tweet.userName}`}><p>{tweet.authorName}</p></Link>
-          <p>{tweet.text}</p>
-          <p>{convertSeconds(tweet.createdAt.seconds)}</p>
+        <div style={{ padding: "20px" }} key={index}>
+          <Link to={`/profiles/${tweet.userName}`}>
+            <p style={{ padding: " 6px 0" }}>{tweet.authorName}</p>
+          </Link>
+          <p style={{ padding: "6px 0" }}>{tweet.text}</p>
+          <p style={{ padding: "6px 0" }}>
+            {convertSeconds(tweet.createdAt.seconds)}
+          </p>
         </div>
       );
     });
