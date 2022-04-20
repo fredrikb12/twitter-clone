@@ -9,13 +9,16 @@ export const UserInfoBox = styled.div`
     font-size: 1.4rem;
   }
 
-  div:first-child {
+  a {
+    text-decoration: none;
+    border-radius: 30px;
     display: flex;
     gap: 8px;
     align-items: center;
+    padding: 5px 10px;
+  }
 
-    a {
-      text-decoration: none;
-    }
+  a:hover {
+    background-color: #233648;
   }
 `;
