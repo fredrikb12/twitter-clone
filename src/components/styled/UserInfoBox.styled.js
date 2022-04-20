@@ -27,7 +27,7 @@ export const UserInfoBox = styled.div`
     gap: 15px;
     align-items: flex-start;
     p {
-      font-size: 1.2rem;
+      display: none
     }
 
     & > div:last-child {
