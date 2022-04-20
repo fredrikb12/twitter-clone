@@ -19,6 +19,7 @@ import StyledHomepageContainer from "./components/styled/StyledHomepageContainer
 import StyledLeftSidebar from "./components/styled/StyledLeftSidebar";
 import StyledRightSidebar from "./components/styled/StyledRightSidebar";
 import RightSidebar from "./RightSidebar";
+import LeftSidebar from "./components/LeftSidebar";
 
 function App() {
   const [user] = useAuthState(getAuth());
@@ -94,7 +95,9 @@ function App() {
   if (user) {
     return (
       <StyledHomepageContainer>
-        <StyledLeftSidebar></StyledLeftSidebar>
+        <StyledLeftSidebar>
+          <LeftSidebar user={user} />
+        </StyledLeftSidebar>
         <div>
           <StyledMainContainer>
             {user && <Outlet context={[user]} />}
