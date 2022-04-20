@@ -1,6 +1,7 @@
 import { getAuth, signOut } from "firebase/auth";
 import React from "react";
 import { useOutletContext } from "react-router-dom";
+import { Button } from "./styled/Button.styled";
 
 function SignOut({user}) {
   function signOutUser() {
@@ -9,7 +10,7 @@ function SignOut({user}) {
 
   return user !== null ? (
     <div>
-      <button onClick={() => signOutUser()}>Sign Out</button>
+      <Button onClick={() => signOutUser()}>Sign Out</Button>
     </div>
   ) : null;
 }
