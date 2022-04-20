@@ -21,4 +21,17 @@ export const UserInfoBox = styled.div`
   a:hover {
     background-color: #233648;
   }
+
+  @media(max-width: 950px) {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    p {
+      font-size: 1.2rem;
+    }
+
+    & > div:last-child {
+      padding-left: 10px;
+    }
+  }
 `;
