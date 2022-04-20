@@ -1,14 +1,15 @@
 import React from "react";
 import * as ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import RouteSwitch from "./RouteSwitch";
+import GlobalStyle from "./components/styled/GlobalStyle";
 
 const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <RouteSwitch/>
+    <GlobalStyle />
+    <RouteSwitch />
   </React.StrictMode>
 );
