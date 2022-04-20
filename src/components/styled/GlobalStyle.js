@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
   }
+
+  body {
+    background-color: #15202B;
+  }
 `;
 
 export default GlobalStyle;
