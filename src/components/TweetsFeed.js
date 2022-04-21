@@ -1,7 +1,22 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { getDB } from "../firebase";
 
 function TweetsFeed({ tweetData }) {
+  const [user] = useOutletContext();
+
   /*useEffect(() => {
     async function getUserNames() {
       if (tweetData && tweetData[0] && tweetData[0].tweets) {
@@ -11,16 +26,46 @@ function TweetsFeed({ tweetData }) {
     getUserNames();
   }, [tweetData]);*/
 
+  async function deleteTweet(userID, tweet) {
+    const userRef = doc(getDB(), "users", userID);
+    const user = await getDoc(userRef);
+
+    const tweetToRemove = {
+      author: tweet.author,
+      createdAt: tweet.createdAt,
+      id: tweet.id,
+      photoURL: tweet.photoURL,
+      text: tweet.text,
+    };
+
+    console.log(user.data());
+    console.log(tweet);
+    //console.log(tweet);
+    await updateDoc(userRef, {
+      tweets: arrayRemove(tweetToRemove),
+    });
+  }
+
   if (tweetData) {
     return tweetData.map((tweet, index) => {
       return (
-        <div style={{ padding: "20px" }} key={index}>
+        <div style={{ padding: "20px", position: "relative" }} key={index}>
+          {user.uid === tweet.author ? (
+            <button
+              onClick={() => {
+                deleteTweet(tweet.author, tweet);
+              }}
+              style={{ position: "absolute", top: "5px", right: "5px" }}
+            >
+              Delete
+            </button>
+          ) : null}
           <Link to={`/profiles/${tweet.userName}`}>
             <p style={{ padding: " 6px 0" }}>{tweet.authorName}</p>
           </Link>
           <p style={{ padding: "6px 0" }}>{tweet.text}</p>
           <p style={{ padding: "6px 0" }}>
-            {convertSeconds(tweet.createdAt.seconds)}
+            {`${convertSeconds(tweet.createdAt)}`}
           </p>
         </div>
       );
@@ -29,7 +74,7 @@ function TweetsFeed({ tweetData }) {
 }
 
 function convertSeconds(seconds) {
-  const date = new Date(seconds * 1000);
+  const date = new Date(seconds);
   const returnD = formatDate(date);
   return returnD;
 }
