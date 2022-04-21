@@ -20,7 +20,7 @@ function CreateTweet() {
   const [user] = useOutletContext();
 
   function handleInput(e) {
-    setTweet(e.target.value);
+    setTweet(() => e.target.value);
   }
 
   async function handleTweet(e) {
