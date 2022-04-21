@@ -132,20 +132,13 @@ function Profile() {
     await updateDoc(userRef, {
       followers: arrayUnion(user.uid),
     });
-    setisFollowed((prev) => {
-      return !prev;
-    });
   }
 
   async function unfollowUser(id) {
     const userRef = doc(getDB(), "users", id);
     if (!userRef) return;
-    console.log(userRef);
     await updateDoc(userRef, {
       followers: arrayRemove(user.uid),
-    });
-    setisFollowed((prev) => {
-      return !prev;
     });
   }
 
