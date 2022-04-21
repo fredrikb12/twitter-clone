@@ -13,6 +13,7 @@ import { getDB } from "../firebase";
 import placeholder from "../images/placeholder.svg";
 import StyledProfilePicture from "./styled/StyledProfilePicture";
 import StyledTweetForm from "./styled/StyledTweetForm";
+import uniqid from "uniqid";
 
 function CreateTweet() {
   const [tweet, setTweet] = useState("");
@@ -45,6 +46,7 @@ function CreateTweet() {
         author: user.uid,
         createdAt: new Date(),
         photoURL: null,
+        id: uniqid(),
       }),
     });
 
