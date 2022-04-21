@@ -49,13 +49,16 @@ function Profile() {
             },
           ];
         });
-        const tweetData = doc.data().tweets.map((tweet) => {
-          return {
-            ...tweet,
-            authorName: doc.data().displayName,
-            userName: doc.data().tag,
-          };
-        });
+        const tweetData = doc
+          .data()
+          .tweets.map((tweet) => {
+            return {
+              ...tweet,
+              authorName: doc.data().displayName,
+              userName: doc.data().tag,
+            };
+          })
+          .sort((a, b) => b.createdAt.seconds - a.createdAt.seconds);
 
         data.push(...tweetData);
       });
