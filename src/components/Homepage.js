@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { getDB } from "../firebase";
@@ -23,18 +23,26 @@ function Homepage() {
   useEffect(() => {
     async function loadTweets() {
       const usersRef = collection(getDB(), "users");
-      const q = query(usersRef, where("followers", "array-contains", user.uid));
+      const q = query(
+        usersRef,
+        where("followers", "array-contains", user.uid),
+      );
 
       const qSnap = await getDocs(q);
       const tweetData = [];
       qSnap.forEach((doc) => {
-        const tweets = doc.data().tweets.map((tweet) => {
-          return {
-            ...tweet,
-            authorName: doc.data().displayName,
-            userName: doc.data().tag,
-          };
-        });
+        const tweets = doc
+          .data()
+          .tweets.map((tweet) => {
+            return {
+              ...tweet,
+              authorName: doc.data().displayName,
+              userName: doc.data().tag,
+            };
+          })
+          .sort((a, b) => {
+            return b.createdAt.seconds - a.createdAt.seconds;
+          });
         const data = {};
         /*data.authorName = doc.data().displayName;
         data.userName = doc.data().tag;
