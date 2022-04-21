@@ -79,8 +79,8 @@ function CreateTweet() {
     <StyledTweetForm>
       <div>
         <StyledProfilePicture
-          src={placeholder}
-          alt="placeholder"
+          src={user.photoURL}
+          alt="profile"
         ></StyledProfilePicture>
       </div>
       <div>
