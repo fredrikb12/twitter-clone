@@ -56,10 +56,12 @@ function Homepage() {
   }, [user.uid]);
 
   return (
-    <div>
-      <CreateTweet />
+    <>
+      <div>
+        <CreateTweet />
+      </div>
       <TweetsFeed tweetData={tweets} />
-    </div>
+    </>
   );
 }
 
