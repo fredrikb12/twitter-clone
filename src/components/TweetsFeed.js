@@ -13,6 +13,7 @@ import {
   where,
 } from "firebase/firestore";
 import { getDB } from "../firebase";
+import BarLoaderIcon from "./BarLoaderIcon";
 
 function TweetsFeed({ tweetData }) {
   const [user] = useOutletContext();
@@ -46,7 +47,7 @@ function TweetsFeed({ tweetData }) {
     });
   }
 
-  if (tweetData) {
+  if (tweetData && tweetData.length > 0) {
     return tweetData.map((tweet, index) => {
       return (
         <div style={{ padding: "20px", position: "relative" }} key={index}>
@@ -70,6 +71,12 @@ function TweetsFeed({ tweetData }) {
         </div>
       );
     });
+  } else {
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <BarLoaderIcon />
+      </div>
+    );
   }
 }
 
