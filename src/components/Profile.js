@@ -24,12 +24,55 @@ function Profile() {
   const [isFollowed, setisFollowed] = useState(false);
 
   useEffect(() => {
-    async function loadUserTweets() {
-      const usersRef = collection(getDB(), "users");
-      const q = query(usersRef, where("tag", "==", userTag));
+    const usersRef = collection(getDB(), "users");
+    const q = query(usersRef, where("tag", "==", userTag));
+    const unsubscribe = onSnapshot(q, (qSnapshot) => {
+      let data = [];
+
+      qSnapshot.forEach((doc) => {
+        const userData = doc.data();
+        setisFollowed(() => {
+          return userData.followers.includes(user.uid);
+        });
+        setUserInfo(() => {
+          return [
+            {
+              bio: userData.bio,
+              displayName: userData.displayName,
+              followersLength: userData.followers.length,
+              followers: userData.followers,
+              following: userData.following.length,
+              tweets: userData.tweets.length,
+              uid: userData.uid,
+            },
+          ];
+        });
+        const tweetData = doc
+          .data()
+          .tweets.map((tweet) => {
+            return {
+              ...tweet,
+              authorName: doc.data().displayName,
+              userName: doc.data().tag,
+            };
+          })
+          .sort((a, b) => {
+            return b.createdAt - a.createdAt;
+          });
+
+        data.push(...tweetData);
+      });
+
+      setTweets(() => {
+        return [...data];
+      });
+    });
+
+    return () => unsubscribe();
+    /*async function loadUserTweets() {
       const qSnap = await getDocs(q);
 
-      let data = [];
+      /* let data = [];
 
       qSnap.forEach((doc) => {
         const userData = doc.data();
@@ -70,7 +113,7 @@ function Profile() {
       });
     }
 
-    loadUserTweets();
+    loadUserTweets();*/
   }, [user.uid, userTag]);
 
   useEffect(() => {
