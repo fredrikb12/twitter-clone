@@ -9,6 +9,7 @@ import StyledLeftSidebar from "./styled/StyledLeftSidebar";
 import SignOut from "./SignOut";
 import { RoundedImage } from "./styled/RoundedImage";
 import { UserInfoBox } from "./styled/UserInfoBox.styled";
+import Circle3DSpinLoader from "./Circle3DSpinLoader";
 
 function LeftSidebar({ user }) {
   const [userInfo, setUserInfo] = useState({});
@@ -64,11 +65,11 @@ function LeftSidebar({ user }) {
       <UserInfoBox>
         <div>
           <Link to={`/profiles/${userInfo.tag}`}>
-            <RoundedImage
+            {userInfo.photoURL ? <RoundedImage
               style={{ width: "40px" }}
               src={userInfo.photoURL}
               alt={"user"}
-            />
+            /> : <Circle3DSpinLoader/> }
 
             <p>{userInfo.displayName}</p>
           </Link>
