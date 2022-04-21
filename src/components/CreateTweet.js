@@ -73,6 +73,7 @@ function CreateTweet() {
       photoURL: null,
     });*/
     console.log("tweet posted");
+    setTweet(() => "")
   }
   return (
     <StyledTweetForm>
