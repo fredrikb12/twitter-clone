@@ -150,7 +150,7 @@ function Profile() {
   }
 
   return (
-    <div>
+    <>
       <UserInfo
         userInfo={userInfo}
         isFollowed={isFollowed}
@@ -158,7 +158,7 @@ function Profile() {
         followUser={followUser}
       />
       <TweetsFeed tweetData={tweets} />
-    </div>
+    </>
   );
 }
 
