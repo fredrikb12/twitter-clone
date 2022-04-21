@@ -3,7 +3,7 @@ import profilePic from "../images/profile.svg";
 import homePic from "../images/home.svg";
 import settingsPic from "../images/settings.svg";
 import { Link, useOutletContext } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { getDB } from "../firebase";
 import StyledLeftSidebar from "./styled/StyledLeftSidebar";
 import SignOut from "./SignOut";
@@ -14,20 +14,26 @@ function LeftSidebar({ user }) {
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
-    async function getUserInfo() {
+    const unsubscribe = onSnapshot(doc(getDB(), "users", user.uid), (doc) => {
+      setUserInfo(() => {
+        return { ...doc.data() };
+      });
+    });
+    /* async function getUserInfo() {
       const userRef = doc(getDB(), "users", user.uid);
       const data = await getDoc(userRef);
       setUserInfo(() => {
         return { ...data.data() };
       });
     }
-    getUserInfo();
+    getUserInfo();*/
+    return () => unsubscribe();
   }, [user]);
 
   useEffect(() => {
     console.log(userInfo);
   }, [userInfo]);
-  return (
+  return userInfo ? (
     <StyledLeftSidebar>
       <nav>
         <ul style={{ listStyle: "none" }}>
@@ -60,17 +66,17 @@ function LeftSidebar({ user }) {
           <Link to={`/profiles/${userInfo.tag}`}>
             <RoundedImage
               style={{ width: "40px" }}
-              src={user.photoURL}
+              src={userInfo.photoURL}
               alt={"user"}
             />
 
-            <p>{user.displayName}</p>
+            <p>{userInfo.displayName}</p>
           </Link>
         </div>
         <SignOut user={user} />
       </UserInfoBox>
     </StyledLeftSidebar>
-  );
+  ) : null;
 }
 
 export default LeftSidebar;
