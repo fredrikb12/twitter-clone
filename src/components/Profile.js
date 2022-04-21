@@ -58,7 +58,9 @@ function Profile() {
               userName: doc.data().tag,
             };
           })
-          .sort((a, b) => b.createdAt.seconds - a.createdAt.seconds);
+          .sort((a, b) => {
+            return b.createdAt - a.createdAt;
+          });
 
         data.push(...tweetData);
       });

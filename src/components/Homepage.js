@@ -23,10 +23,7 @@ function Homepage() {
   useEffect(() => {
     async function loadTweets() {
       const usersRef = collection(getDB(), "users");
-      const q = query(
-        usersRef,
-        where("followers", "array-contains", user.uid),
-      );
+      const q = query(usersRef, where("followers", "array-contains", user.uid));
 
       const qSnap = await getDocs(q);
       const tweetData = [];
@@ -41,7 +38,7 @@ function Homepage() {
             };
           })
           .sort((a, b) => {
-            return b.createdAt.seconds - a.createdAt.seconds;
+            return b.createdAt - a.createdAt;
           });
         const data = {};
         /*data.authorName = doc.data().displayName;

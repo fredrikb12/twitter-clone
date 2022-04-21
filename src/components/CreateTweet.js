@@ -44,7 +44,7 @@ function CreateTweet() {
       tweets: arrayUnion({
         text: tweet,
         author: user.uid,
-        createdAt: new Date(),
+        createdAt: new Date().getTime(),
         photoURL: null,
         id: uniqid(),
       }),
@@ -73,7 +73,7 @@ function CreateTweet() {
       photoURL: null,
     });*/
     console.log("tweet posted");
-    setTweet(() => "")
+    setTweet(() => "");
   }
   return (
     <StyledTweetForm>
