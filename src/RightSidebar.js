@@ -13,6 +13,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import Search from "./components/Search";
 
 function RightSidebar({ user }) {
   const [suggestions, setSuggestions] = useState([]);
@@ -68,6 +69,7 @@ function RightSidebar({ user }) {
 
   return (
     <div>
+      <Search />
       <h3>Suggested for you:</h3>
       {suggestions
         ? suggestions.map((item, index) => {
