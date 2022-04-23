@@ -83,45 +83,63 @@ function Search() {
   }
 
   return (
-    <div style={{ marginBottom: "40px", padding: "10px" }}>
+    <div
+      style={{ marginBottom: "240px", padding: "10px", position: "relative" }}
+    >
       <label>
         Search for user:
         <input type="text" value={searchTerm} onChange={handleInput} />
       </label>
 
-      {searchResults.length > 0 && displayResults
-        ? searchResults.map((result) => {
-            return (
-              <div
-                style={{
-                  border: "1px solid black",
-                  padding: "10px",
-                  position: "relative",
-                }}
-                key={result.tag}
-              >
-                <StyledLink as="a" textColor="#efefef" href={`/profiles/${result.tag}`}>
-                  <p style={{ fontSize: "1.3rem" }}>{result.displayName}</p>
-                </StyledLink>
-                <StyledLink
-                  as="a"
-                  textColor="#efefef"
-                  href={`/profiles/${result.tag}`}
-                >
-                  <p style={{ fontSize: "0.9rem" }}>@{result.tag}</p>
-                </StyledLink>
-                <button
-                  onClick={() => {
-                    setDisplayResults(() => false);
-                    setSearchResults(() => []);
+      <div
+        style={{
+          position: "absolute",
+          zIndex: "3",
+          backgroundColor: "#15202B",
+          width: "calc(100% - 10px)",
+          border: "none",
+          left: "-10px",
+          paddingTop: "10px",
+          minHeight: "200px",
+        }}
+      >
+        {searchResults.length > 0 && displayResults
+          ? searchResults.map((result) => {
+              return (
+                <div
+                  style={{
+                    padding: "10px",
+                    position: "relative",
                   }}
+                  key={result.tag}
                 >
-                  Close Search
-                </button>
-              </div>
-            );
-          })
-        : displayItem}
+                  <StyledLink
+                    as="a"
+                    textColor="#efefef"
+                    href={`/profiles/${result.tag}`}
+                  >
+                    <p style={{ fontSize: "1.3rem" }}>{result.displayName}</p>
+                  </StyledLink>
+                  <StyledLink
+                    as="a"
+                    textColor="#efefef"
+                    href={`/profiles/${result.tag}`}
+                  >
+                    <p style={{ fontSize: "0.9rem" }}>@{result.tag}</p>
+                  </StyledLink>
+                  <button
+                    onClick={() => {
+                      setDisplayResults(() => false);
+                      setSearchResults(() => []);
+                    }}
+                  >
+                    Close Search
+                  </button>
+                </div>
+              );
+            })
+          : displayItem}
+      </div>
     </div>
   );
 }
