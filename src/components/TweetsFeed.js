@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { getDB } from "../firebase";
 import BarLoaderIcon from "./BarLoaderIcon";
+import { SecondaryLink, StyledLink } from "./styled/Links.styled";
 
 function TweetsFeed({ tweetData }) {
   const [user] = useOutletContext();
@@ -61,9 +62,16 @@ function TweetsFeed({ tweetData }) {
               Delete
             </button>
           ) : null}
-          <Link to={`/profiles/${tweet.userName}`}>
-            <p style={{ padding: " 6px 0" }}>{tweet.authorName}</p>
-          </Link>
+          <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
+            <StyledLink as="a" href={`/profiles/${tweet.userName}`}>
+              <p style={{ padding: " 6px 0", fontWeight: "700" }}>
+                {tweet.authorName}
+              </p>
+            </StyledLink>
+            <SecondaryLink as="a" href={`/profiles/${tweet.userName}`}>
+              <p style={{ fontSize: "0.9rem" }}>@{tweet.userName}</p>
+            </SecondaryLink>
+          </div>
           <p style={{ padding: "6px 0" }}>{tweet.text}</p>
           <p style={{ padding: "6px 0" }}>
             {`${convertSeconds(tweet.createdAt)}`}
