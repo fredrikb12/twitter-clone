@@ -1,5 +1,7 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
+import Button from "./Button";
+import StyledFlexRowContainer from "./styled/StyledFlexRowContainer";
 
 function UserInfo({ userInfo, isFollowed, unfollowUser, followUser }) {
   const [user] = useOutletContext();
@@ -11,17 +13,29 @@ function UserInfo({ userInfo, isFollowed, unfollowUser, followUser }) {
             if (index > 0) return null;
             return (
               <div key={index}>
-                <h1>{item.displayName}</h1>
+                <h1 style={{ fontSize: "1.8rem" }}>{item.displayName}</h1>
                 <p>{item.bio}</p>
-                <p>followers: {item.followersLength}</p>
-                <p>following: {item.following}</p>
+                <StyledFlexRowContainer
+                  style={{
+                    gap: "10px",
+                    fontSize: "0.95rem",
+                    padding: "8px 0",
+                  }}
+                >
+                  <p>followers: {item.followersLength}</p>
+                  <p>following: {item.following}</p>
+                </StyledFlexRowContainer>
                 {user.uid !== item.uid ? (
                   user && isFollowed ? (
-                    <button onClick={() => unfollowUser(item.uid)}>
-                      Unfollow
-                    </button>
+                    <Button
+                      text={"Unfollow"}
+                      onClick={() => unfollowUser(item.uid)}
+                    />
                   ) : (
-                    <button onClick={() => followUser(item.uid)}>Follow</button>
+                    <Button
+                      text={"Follow"}
+                      onClick={() => followUser(item.uid)}
+                    />
                   )
                 ) : null}
               </div>
