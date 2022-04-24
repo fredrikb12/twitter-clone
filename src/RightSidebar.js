@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Search from "./components/Search";
-import { StyledLink } from "./components/styled/Links.styled";
+import { SecondaryLink, StyledLink } from "./components/styled/Links.styled";
 import { RoundedImage } from "./components/styled/RoundedImage.js";
 
 function RightSidebar({ user }) {
@@ -90,9 +90,14 @@ function RightSidebar({ user }) {
                   src={item.photoURL}
                   alt={`profile of ${item.displayName}`}
                 />
-                <StyledLink as="a" href={`/profiles/${item.tag}`}>
-                  <p>{item.displayName}</p>
-                </StyledLink>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <StyledLink as="a" href={`/profiles/${item.tag}`}>
+                    <p>{item.displayName}</p>
+                  </StyledLink>
+                  <SecondaryLink as="a" href={`/profiles/${item.tag}`}>
+                    <p style={{ fontSize: "0.9rem" }}>@{item.tag}</p>
+                  </SecondaryLink>
+                </div>
               </div>
             );
           })

@@ -5,12 +5,16 @@ const UnstyledLink = ({ href, children }) => {
   return <Link to={href}>{children}</Link>;
 };
 
-export const StyledLink = styled(UnstyledLink)`
+const BaseLink = styled(UnstyledLink)`
   text-decoration: none;
   color: ${({ theme }) => theme.clr.textPrimary};
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
-export const SecondaryLink = styled(UnstyledLink)`
-  text-decoration: none;
+export const StyledLink = styled(BaseLink)``;
+
+export const SecondaryLink = styled(BaseLink)`
   color: ${({ theme }) => theme.clr.textSecondary};
 `;
