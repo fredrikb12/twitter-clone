@@ -1,16 +1,16 @@
 import { getAuth, signOut } from "firebase/auth";
 import React from "react";
 import { useOutletContext } from "react-router-dom";
-import { Button } from "./styled/Button.styled";
+import Button from "./Button";
 
-function SignOut({user}) {
+function SignOut({ user }) {
   function signOutUser() {
     signOut(getAuth());
   }
 
   return user !== null ? (
     <div>
-      <Button onClick={() => signOutUser()}>Sign Out</Button>
+      <Button text={"Sign Out"} onClick={() => signOutUser()}></Button>
     </div>
   ) : null;
 }

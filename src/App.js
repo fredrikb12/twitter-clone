@@ -33,6 +33,7 @@ function App() {
       textPrimary: blueTheme ? "#f9f9f9" : "#c9e2f2",
       textSecondary: blueTheme ? "#cbc8c8" : "#c4ced4",
       buttonBg: blueTheme ? "#0698f9" : "#60bdfb",
+      buttonDarkBg: blueTheme ? "#223d59" : "#376290",
       buttonText: blueTheme ? "#d7eefe" : "#b1defb",
       background: blueTheme ? "#15202B" : "#0a0f15",
     },
