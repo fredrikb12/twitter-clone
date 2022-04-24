@@ -22,6 +22,7 @@ function Profile() {
   const [tweets, setTweets] = useState([]);
   const { userTag } = useParams();
   const [isFollowed, setisFollowed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const usersRef = collection(getDB(), "users");
@@ -66,6 +67,7 @@ function Profile() {
       setTweets(() => {
         return [...data];
       });
+      setIsLoading(() => false);
     });
 
     return () => unsubscribe();
@@ -150,7 +152,7 @@ function Profile() {
         unfollowUser={unfollowUser}
         followUser={followUser}
       />
-      <TweetsFeed tweetData={tweets} />
+      <TweetsFeed tweetData={tweets} isLoading={isLoading} />
     </>
   );
 }

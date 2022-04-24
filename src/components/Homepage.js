@@ -15,6 +15,7 @@ import TweetsFeed from "./TweetsFeed";
 function Homepage() {
   const [user] = useOutletContext();
   const [tweets, setTweets] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     console.log("tweets: ", tweets);
@@ -51,6 +52,7 @@ function Homepage() {
       setTweets(() => {
         return [...tweetData];
       });
+      setIsLoading(() => true);
     }
     loadTweets();
   }, [user.uid]);
@@ -60,7 +62,7 @@ function Homepage() {
       <div>
         <CreateTweet />
       </div>
-      <TweetsFeed tweetData={tweets} />
+      <TweetsFeed tweetData={tweets} isLoading={isLoading} />
     </>
   );
 }

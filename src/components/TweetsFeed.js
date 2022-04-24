@@ -18,7 +18,7 @@ import { SecondaryLink, StyledLink } from "./styled/Links.styled";
 import placeholderProfilePic from "../images/placeholder.svg";
 import { RoundedImage } from "./styled/RoundedImage";
 
-function TweetsFeed({ tweetData }) {
+function TweetsFeed({ tweetData, isLoading }) {
   const [user] = useOutletContext();
 
   /*useEffect(() => {
@@ -86,16 +86,16 @@ function TweetsFeed({ tweetData }) {
         </div>
       );
     });
-  } else if (!tweetData) {
+  } else if (tweetData.length === 0 && !isLoading) {
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <BarLoaderIcon />
+      <div>
+        <p>No tweets yet...</p>
       </div>
     );
   } else {
     return (
-      <div>
-        <p>No tweets yet...</p>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <BarLoaderIcon />
       </div>
     );
   }
