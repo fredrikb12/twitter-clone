@@ -17,3 +17,9 @@ export const StyledSearch = styled.div`
     font-size: 1.05rem;
   }
 `;
+
+export const CloseSearchButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
