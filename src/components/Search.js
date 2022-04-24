@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { SecondaryLink, StyledLink } from "./styled/Links.styled";
 import searchImg from "../images/search.svg";
 import { SearchButton } from "./styled/SearchButton.styled";
-import { StyledSearch } from "./styled/Search.styled";
+import { CloseSearchButton, StyledSearch } from "./styled/Search.styled";
 
 function Search() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,18 +61,18 @@ function Search() {
   if (displayResults && searchResults.length === 0 && !isLoading) {
     displayItem = (
       <div style={{ padding: "10px 0px" }}>
-        <p style={{ paddingBottom: "10px" }}>
+        <p style={{ padding: "10px" }}>
           No users were found. If you expected a result, try again with proper
           casing, as results are case sensitive.
         </p>
-        <button
+        <CloseSearchButton
           onClick={() => {
             setDisplayResults(() => false);
             setSearchResults(() => []);
           }}
         >
           Close Search
-        </button>
+        </CloseSearchButton>
       </div>
     );
   } else if (isLoading) {
@@ -136,23 +136,22 @@ function Search() {
                   }}
                   key={result.tag}
                 >
-                  <StyledLink as="a" href={`/profiles/${result.tag}`}>
+                  <StyledLink to={`/profiles/${result.tag}`}>
                     <p style={{ fontSize: "1.3rem" }}>{result.displayName}</p>
                   </StyledLink>
-                  <SecondaryLink as="a" href={`/profiles/${result.tag}`}>
+                  <SecondaryLink to={`/profiles/${result.tag}`}>
                     <p style={{ fontSize: "0.8rem" }}>
                       @<span style={{ fontSize: "0.95rem" }}>{result.tag}</span>
                     </p>
                   </SecondaryLink>
-                  <button
-                    style={{ position: "absolute", top: "0", right: "0" }}
+                  <CloseSearchButton
                     onClick={() => {
                       setDisplayResults(() => false);
                       setSearchResults(() => []);
                     }}
                   >
                     Close Search
-                  </button>
+                  </CloseSearchButton>
                 </div>
               );
             })

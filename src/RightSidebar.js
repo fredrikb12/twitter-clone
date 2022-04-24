@@ -91,10 +91,10 @@ function RightSidebar({ user }) {
                   alt={`profile of ${item.displayName}`}
                 />
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <StyledLink as="a" href={`/profiles/${item.tag}`}>
+                  <StyledLink to={`/profiles/${item.tag}`}>
                     <p>{item.displayName}</p>
                   </StyledLink>
-                  <SecondaryLink as="a" href={`/profiles/${item.tag}`}>
+                  <SecondaryLink  to={`/profiles/${item.tag}`}>
                     <p style={{ fontSize: "0.9rem" }}>@{item.tag}</p>
                   </SecondaryLink>
                 </div>

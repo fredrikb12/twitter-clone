@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import profilePic from "../images/profile.svg";
 import homePic from "../images/home.svg";
 import settingsPic from "../images/settings.svg";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, NavLink, useOutletContext } from "react-router-dom";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { getDB } from "../firebase";
 import StyledLeftSidebar from "./styled/StyledLeftSidebar";
@@ -39,37 +39,56 @@ function LeftSidebar({ user }) {
       <nav>
         <ul style={{ listStyle: "none" }}>
           <li>
-            <Link to={`/`}>
+            <NavLink
+              to={`/`}
+              style={({ isActive }) => {
+                return { textDecoration: isActive ? "underline" : "none" };
+              }}
+            >
               <img style={{ width: "40px" }} src={homePic} alt={"home"} />
               <p>Home</p>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to={userInfo.tag ? `/profiles/${userInfo.tag}` : "/"}>
+            <NavLink
+              to={userInfo.tag ? `/profiles/${userInfo.tag}` : "/"}
+              style={({ isActive }) => {
+                return { textDecoration: isActive ? "underline" : "none" };
+              }}
+            >
               <img style={{ width: "40px" }} src={profilePic} alt={"profile"} />
               <p>Profile</p>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to={"/settings"}>
+            <NavLink
+              to={"/settings"}
+              style={({ isActive }) => {
+                return { textDecoration: isActive ? "underline" : "none" };
+              }}
+            >
               <img
                 style={{ width: "40px" }}
                 src={settingsPic}
                 alt={"settings"}
               />
               <p>Settings</p>
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>
       <UserInfoBox>
         <div>
           <Link to={`/profiles/${userInfo.tag}`}>
-            {userInfo.photoURL ? <RoundedImage
-              style={{ width: "40px" }}
-              src={userInfo.photoURL}
-              alt={"user"}
-            /> : <Circle3DSpinLoader/> }
+            {userInfo.photoURL ? (
+              <RoundedImage
+                style={{ width: "40px" }}
+                src={userInfo.photoURL}
+                alt={"user"}
+              />
+            ) : (
+              <Circle3DSpinLoader />
+            )}
 
             <p>{userInfo.displayName}</p>
           </Link>

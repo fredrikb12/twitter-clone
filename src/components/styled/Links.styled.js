@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const UnstyledLink = ({ href, children }) => {
-  return <Link to={href}>{children}</Link>;
-};
-
-const BaseLink = styled(UnstyledLink)`
+export const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.clr.textPrimary};
   &:hover {
@@ -13,8 +9,6 @@ const BaseLink = styled(UnstyledLink)`
   }
 `;
 
-export const StyledLink = styled(BaseLink)``;
-
-export const SecondaryLink = styled(BaseLink)`
+export const SecondaryLink = styled(StyledLink)`
   color: ${({ theme }) => theme.clr.textSecondary};
 `;

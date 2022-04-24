@@ -63,12 +63,12 @@ function TweetsFeed({ tweetData }) {
             </button>
           ) : null}
           <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
-            <StyledLink as="a" href={`/profiles/${tweet.userName}`}>
+            <StyledLink to={`/profiles/${tweet.userName}`}>
               <p style={{ padding: " 6px 0", fontWeight: "700" }}>
                 {tweet.authorName}
               </p>
             </StyledLink>
-            <SecondaryLink as="a" href={`/profiles/${tweet.userName}`}>
+            <SecondaryLink to={`/profiles/${tweet.userName}`}>
               <p style={{ fontSize: "0.9rem" }}>@{tweet.userName}</p>
             </SecondaryLink>
           </div>
@@ -79,7 +79,7 @@ function TweetsFeed({ tweetData }) {
         </div>
       );
     });
-  } else {
+  } else if (!tweetData) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
         <BarLoaderIcon />
