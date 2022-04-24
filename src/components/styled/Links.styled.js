@@ -7,5 +7,10 @@ const UnstyledLink = ({ href, children }) => {
 
 export const StyledLink = styled(UnstyledLink)`
   text-decoration: none;
-  color: ${(props) => (props.textColor ? props.textColor : "white")};
+  color: ${({ theme }) => theme.clr.textPrimary};
+`;
+
+export const SecondaryLink = styled(UnstyledLink)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.clr.textSecondary};
 `;
