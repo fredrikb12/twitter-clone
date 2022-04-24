@@ -14,6 +14,8 @@ import {
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Search from "./components/Search";
+import { StyledLink } from "./components/styled/Links.styled";
+import { RoundedImage } from "./components/styled/RoundedImage.js";
 
 function RightSidebar({ user }) {
   const [suggestions, setSuggestions] = useState([]);
@@ -74,15 +76,23 @@ function RightSidebar({ user }) {
       {suggestions
         ? suggestions.map((item, index) => {
             return (
-              <div key={index}>
-                <img
-                  style={{ width: "40px", height: "40px" }}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "10px",
+                }}
+                key={index}
+              >
+                <RoundedImage
+                  style={{ width: "30px", height: "30px" }}
                   src={item.photoURL}
                   alt={`profile of ${item.displayName}`}
                 />
-                <Link to={`/profiles/${item.tag}`}>
+                <StyledLink as="a" href={`/profiles/${item.tag}`}>
                   <p>{item.displayName}</p>
-                </Link>
+                </StyledLink>
               </div>
             );
           })
