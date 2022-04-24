@@ -20,9 +20,23 @@ import StyledLeftSidebar from "./components/styled/StyledLeftSidebar";
 import StyledRightSidebar from "./components/styled/StyledRightSidebar";
 import RightSidebar from "./RightSidebar";
 import LeftSidebar from "./components/LeftSidebar";
+import { ThemeProvider } from "styled-components";
+import GlobalStyle from "./components/styled/GlobalStyle";
 
 function App() {
   const [user] = useAuthState(getAuth());
+
+  const [blueTheme, setBlueTheme] = useState(true);
+
+  const theme = {
+    clr: {
+      textPrimary: blueTheme ? "#f9f9f9" : "#c9e2f2",
+      textSecondary: blueTheme ? "#cbc8c8" : "#c4ced4",
+      buttonBg: blueTheme ? "#0698f9" : "#60bdfb",
+      buttonText: blueTheme ? "#d7eefe" : "#b1defb",
+      background: blueTheme ? "#15202B" : "#0a0f15",
+    },
+  };
 
   function initFirebaseAuth() {
     //TODO: authStateObserver function
@@ -94,17 +108,20 @@ function App() {
   }
   if (user) {
     return (
-      <StyledHomepageContainer>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <StyledHomepageContainer>
           <LeftSidebar user={user} />
-        <div>
-          <StyledMainContainer>
-            {user && <Outlet context={[user]} />}
-          </StyledMainContainer>
-        </div>
-        <StyledRightSidebar>
-          <RightSidebar user={user} />
-        </StyledRightSidebar>
-      </StyledHomepageContainer>
+          <div>
+            <StyledMainContainer>
+              {user && <Outlet context={[user]} />}
+            </StyledMainContainer>
+          </div>
+          <StyledRightSidebar>
+            <RightSidebar user={user} />
+          </StyledRightSidebar>
+        </StyledHomepageContainer>
+      </ThemeProvider>
     );
   } else {
     return <SignIn />;

@@ -7,8 +7,8 @@ const StyledMainContainer = styled.main`
   flex-direction: column;
   min-width: 300px;
   max-width: 600px;
-  color: #f9f9f9;
-
+  color: ${({ theme }) => theme.primaryText};
+  
   & > div {
     border: 1px solid ${borderColor};
     border-bottom: none;
