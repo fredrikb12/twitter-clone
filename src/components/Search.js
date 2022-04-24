@@ -92,7 +92,6 @@ function Search() {
       <StyledSearch>
         <input
           placeholder={"Search"}
-          defaultValue={"Search for user"}
           type="text"
           value={searchTerm}
           onChange={handleInput}

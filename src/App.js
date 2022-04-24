@@ -18,7 +18,7 @@ import StyledMainContainer from "./components/styled/StyledMainContainer";
 import StyledHomepageContainer from "./components/styled/StyledHomepageContainer";
 import StyledLeftSidebar from "./components/styled/StyledLeftSidebar";
 import StyledRightSidebar from "./components/styled/StyledRightSidebar";
-import RightSidebar from "./RightSidebar";
+import RightSidebar from "./components/RightSidebar";
 import LeftSidebar from "./components/LeftSidebar";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./components/styled/GlobalStyle";

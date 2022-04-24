@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getDB } from "./firebase";
+import { getDB } from "../firebase";
 import {
   collection,
   doc,
@@ -13,9 +13,9 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import Search from "./components/Search";
-import { SecondaryLink, StyledLink } from "./components/styled/Links.styled";
-import { RoundedImage } from "./components/styled/RoundedImage.js";
+import Search from "./Search";
+import { SecondaryLink, StyledLink } from "./styled/Links.styled";
+import { RoundedImage } from "./styled/RoundedImage.js";
 
 function RightSidebar({ user }) {
   const [suggestions, setSuggestions] = useState([]);
