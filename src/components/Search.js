@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 import BarLoaderIcon from "./BarLoaderIcon";
 import { Link } from "react-router-dom";
-import { StyledLink } from "./styled/Link.styled";
+import { SecondaryLink, StyledLink } from "./styled/Links.styled";
 
 function Search() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -84,7 +84,11 @@ function Search() {
 
   return (
     <div
-      style={{ marginBottom: "240px", padding: "10px", position: "relative" }}
+      style={{
+        marginBottom: "240px",
+        padding: "10px",
+        position: "relative",
+      }}
     >
       <label>
         Search for user:
@@ -92,16 +96,21 @@ function Search() {
       </label>
 
       <div
-        style={{
-          position: "absolute",
-          zIndex: "3",
-          backgroundColor: "#15202B",
-          width: "calc(100% - 10px)",
-          border: "none",
-          left: "-10px",
-          paddingTop: "10px",
-          minHeight: "200px",
-        }}
+        style={
+          displayResults
+            ? {
+                position: "absolute",
+                zIndex: "3",
+                backgroundColor: "#15202B",
+                width: "calc(100% - 10px)",
+                border: "1px solid #ababab",
+                borderTop: "none",
+                left: "-10px",
+                paddingTop: "10px",
+                paddingBottom: "10px",
+              }
+            : null
+        }
       >
         {searchResults.length > 0 && displayResults
           ? searchResults.map((result) => {
@@ -113,20 +122,14 @@ function Search() {
                   }}
                   key={result.tag}
                 >
-                  <StyledLink
-                    as="a"
-                    textColor="#efefef"
-                    href={`/profiles/${result.tag}`}
-                  >
+                  <StyledLink as="a" href={`/profiles/${result.tag}`}>
                     <p style={{ fontSize: "1.3rem" }}>{result.displayName}</p>
                   </StyledLink>
-                  <StyledLink
-                    as="a"
-                    textColor="#efefef"
-                    href={`/profiles/${result.tag}`}
-                  >
-                    <p style={{ fontSize: "0.9rem" }}>@{result.tag}</p>
-                  </StyledLink>
+                  <SecondaryLink as="a" href={`/profiles/${result.tag}`}>
+                    <p style={{ fontSize: "0.8rem" }}>
+                      @<span style={{ fontSize: "0.95rem" }}>{result.tag}</span>
+                    </p>
+                  </SecondaryLink>
                   <button
                     onClick={() => {
                       setDisplayResults(() => false);
