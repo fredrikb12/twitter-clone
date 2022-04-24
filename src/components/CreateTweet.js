@@ -45,7 +45,7 @@ function CreateTweet() {
         text: tweet,
         author: user.uid,
         createdAt: new Date().getTime(),
-        photoURL: null,
+        photoURL: user.photoURL,
         id: uniqid(),
       }),
     });

@@ -15,6 +15,8 @@ import {
 import { getDB } from "../firebase";
 import BarLoaderIcon from "./BarLoaderIcon";
 import { SecondaryLink, StyledLink } from "./styled/Links.styled";
+import placeholderProfilePic from "../images/placeholder.svg";
+import { RoundedImage } from "./styled/RoundedImage";
 
 function TweetsFeed({ tweetData }) {
   const [user] = useOutletContext();
@@ -62,9 +64,14 @@ function TweetsFeed({ tweetData }) {
               Delete
             </button>
           ) : null}
-          <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <RoundedImage
+              src={tweet.photoURL || placeholderProfilePic}
+              alt="profile"
+              style={{ width: "30px" }}
+            />
             <StyledLink to={`/profiles/${tweet.userName}`}>
-              <p style={{ padding: " 6px 0", fontWeight: "700" }}>
+              <p style={{ padding: " 2px 0", fontWeight: "700" }}>
                 {tweet.authorName}
               </p>
             </StyledLink>
@@ -83,6 +90,12 @@ function TweetsFeed({ tweetData }) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
         <BarLoaderIcon />
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <p>No tweets yet...</p>
       </div>
     );
   }
