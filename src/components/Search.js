@@ -15,6 +15,9 @@ import {
 import BarLoaderIcon from "./BarLoaderIcon";
 import { Link } from "react-router-dom";
 import { SecondaryLink, StyledLink } from "./styled/Links.styled";
+import searchImg from "../images/search.svg";
+import { SearchButton } from "./styled/SearchButton.styled";
+import { StyledSearch } from "./styled/Search.styled";
 
 function Search() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -75,11 +78,7 @@ function Search() {
   } else if (isLoading) {
     displayItem = <BarLoaderIcon />;
   } else {
-    displayItem = (
-      <button type="button" onClick={handleSearch}>
-        Search
-      </button>
-    );
+    displayItem = null;
   }
 
   return (
@@ -90,10 +89,26 @@ function Search() {
         position: "relative",
       }}
     >
-      <label>
-        Search for user:
-        <input type="text" value={searchTerm} onChange={handleInput} />
-      </label>
+      <StyledSearch>
+        <input
+          placeholder={"Search"}
+          defaultValue={"Search for user"}
+          type="text"
+          value={searchTerm}
+          onChange={handleInput}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            } else if (e.key === "Escape") {
+              setDisplayResults(() => false);
+              setSearchResults(() => []);
+            }
+          }}
+        />
+        <SearchButton type="button" onClick={handleSearch}>
+          <img style={{ width: "20px" }} src={searchImg} alt="search" />
+        </SearchButton>
+      </StyledSearch>
 
       <div
         style={
@@ -102,12 +117,11 @@ function Search() {
                 position: "absolute",
                 zIndex: "3",
                 backgroundColor: "#15202B",
-                width: "calc(100% - 10px)",
+                width: "calc(100% - 20px)",
                 border: "1px solid #ababab",
                 borderTop: "none",
-                left: "-10px",
-                paddingTop: "10px",
-                paddingBottom: "10px",
+                left: "10px",
+                padding: "15px 10px",
               }
             : null
         }
@@ -131,6 +145,7 @@ function Search() {
                     </p>
                   </SecondaryLink>
                   <button
+                    style={{ position: "absolute", top: "0", right: "0" }}
                     onClick={() => {
                       setDisplayResults(() => false);
                       setSearchResults(() => []);
