@@ -15,6 +15,8 @@ import {
 import { getDB } from "../firebase";
 import { RoundedImage } from "./styled/RoundedImage";
 import BarLoaderIcon from "./BarLoaderIcon";
+import { StyledSettings } from "./styled/Settings.styled";
+import Button from "./Button";
 
 function Settings() {
   const [user] = useOutletContext();
@@ -53,10 +55,10 @@ function Settings() {
   }
 
   return userInfo ? (
-    <form>
+    <StyledSettings>
       <div>
         <label>
-          Edit Display Name
+          Display Name
           <input
             onChange={handleChange}
             name="displayName"
@@ -64,27 +66,29 @@ function Settings() {
             value={userInfo.displayName}
           />
         </label>
-        <button type="button" onClick={(e) => submitInfo(e, "displayName")}>
+        <Button type="button" onClick={(e) => submitInfo(e, "displayName")}>
           Submit Name
-        </button>
+        </Button>
       </div>
       <div>
         <label>
-          Edit Bio
+          Bio
           <textarea
             onChange={handleChange}
             name="bio"
             type="text"
             value={userInfo.bio}
+            cols="25"
+            rows="4"
           />
         </label>
-        <button type="button" onClick={(e) => submitInfo(e, "bio")}>
+        <Button type="button" onClick={(e) => submitInfo(e, "bio")}>
           Submit Bio
-        </button>
+        </Button>
       </div>
       <div>
         <label>
-          Edit User Tag
+          User Tag
           <input
             type="text"
             name="tag"
@@ -92,11 +96,11 @@ function Settings() {
             value={userInfo.tag}
           />
         </label>
-        <button type="button" onClick={(e) => submitInfo(e, "tag")}>
+        <Button type="button" onClick={(e) => submitInfo(e, "tag")}>
           Submit tag
-        </button>
+        </Button>
       </div>
-    </form>
+    </StyledSettings>
   ) : (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <BarLoaderIcon />

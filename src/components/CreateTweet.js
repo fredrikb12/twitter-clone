@@ -14,6 +14,7 @@ import placeholder from "../images/placeholder.svg";
 import StyledProfilePicture from "./styled/StyledProfilePicture";
 import StyledTweetForm from "./styled/StyledTweetForm";
 import uniqid from "uniqid";
+import Button from "./Button";
 
 function CreateTweet() {
   const [tweet, setTweet] = useState("");
@@ -77,23 +78,37 @@ function CreateTweet() {
   }
   return (
     <StyledTweetForm>
-      <div>
-        <StyledProfilePicture
-          src={user.photoURL}
-          alt="profile"
-        ></StyledProfilePicture>
+      <div
+        style={{ display: "flex", alignItems: "center", position: "relative" }}
+      >
+        <div style={{ padding: "10px" }}>
+          <StyledProfilePicture
+            src={user.photoURL}
+            alt="profile"
+          ></StyledProfilePicture>
+        </div>
+        <div>
+          <textarea
+            maxLength={280}
+            cols="40"
+            rows="8"
+            value={tweet}
+            onChange={handleInput}
+            style={{
+              backgroundColor: "transparent",
+              border: "1px solid #ababab",
+              resize: "none",
+              borderRadius: "8px",
+            }}
+          />
+        </div>
       </div>
-      <div>
-        <textarea
-          maxLength={280}
-          cols="40"
-          rows="8"
-          value={tweet}
-          onChange={handleInput}
-        />
 
-        <button onClick={handleTweet}>Tweet</button>
-      </div>
+      <Button
+        onClick={handleTweet}
+      >
+        Tweet
+      </Button>
     </StyledTweetForm>
   );
 }

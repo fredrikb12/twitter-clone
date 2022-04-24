@@ -15,6 +15,7 @@ import {
 import { getDB } from "../firebase";
 import TweetsFeed from "./TweetsFeed";
 import UserInfo from "./UserInfo";
+import LowWidthSearch from "./LowWidthSearch";
 
 function Profile() {
   const [user] = useOutletContext();
@@ -146,6 +147,7 @@ function Profile() {
 
   return (
     <>
+      <LowWidthSearch style={{ border: "none", position: "relative" }} />
       <UserInfo
         userInfo={userInfo}
         isFollowed={isFollowed}

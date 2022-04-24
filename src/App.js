@@ -125,7 +125,11 @@ function App() {
       </ThemeProvider>
     );
   } else {
-    return <SignIn />;
+    return (
+      <ThemeProvider theme={theme}>
+        <SignIn />
+      </ThemeProvider>
+    );
   }
 }
 

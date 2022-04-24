@@ -10,9 +10,13 @@ import SignOut from "./SignOut";
 import { RoundedImage } from "./styled/RoundedImage";
 import { UserInfoBox } from "./styled/UserInfoBox.styled";
 import Circle3DSpinLoader from "./Circle3DSpinLoader";
+import useWindowWidth from "../getWindowWidth";
+import Search from "./Search";
+import LowWidthSearch from "./LowWidthSearch";
 
 function LeftSidebar({ user }) {
   const [userInfo, setUserInfo] = useState({});
+  const { width } = useWindowWidth();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(getDB(), "users", user.uid), (doc) => {
@@ -36,47 +40,56 @@ function LeftSidebar({ user }) {
   }, [userInfo]);
   return userInfo ? (
     <StyledLeftSidebar>
-      <nav>
-        <ul style={{ listStyle: "none" }}>
-          <li>
-            <NavLink
-              to={`/`}
-              style={({ isActive }) => {
-                return { textDecoration: isActive ? "underline" : "none" };
-              }}
-            >
-              <img style={{ width: "40px" }} src={homePic} alt={"home"} />
-              <p>Home</p>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={userInfo.tag ? `/profiles/${userInfo.tag}` : "/"}
-              style={({ isActive }) => {
-                return { textDecoration: isActive ? "underline" : "none" };
-              }}
-            >
-              <img style={{ width: "40px" }} src={profilePic} alt={"profile"} />
-              <p>Profile</p>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"/settings"}
-              style={({ isActive }) => {
-                return { textDecoration: isActive ? "underline" : "none" };
-              }}
-            >
-              <img
-                style={{ width: "40px" }}
-                src={settingsPic}
-                alt={"settings"}
-              />
-              <p>Settings</p>
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+      <div>
+        <nav>
+          <ul style={{ listStyle: "none" }}>
+            <li>
+              <NavLink
+                to={`/`}
+                style={({ isActive }) => {
+                  return { textDecoration: isActive ? "underline" : "none" };
+                }}
+              >
+                <img style={{ width: "40px" }} src={homePic} alt={"home"} />
+                <p>Home</p>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={userInfo.tag ? `/profiles/${userInfo.tag}` : "/"}
+                style={({ isActive }) => {
+                  return { textDecoration: isActive ? "underline" : "none" };
+                }}
+              >
+                <img
+                  style={{ width: "40px" }}
+                  src={profilePic}
+                  alt={"profile"}
+                />
+                <p>Profile</p>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/settings"}
+                style={({ isActive }) => {
+                  return { textDecoration: isActive ? "underline" : "none" };
+                }}
+              >
+                <img
+                  style={{ width: "40px" }}
+                  src={settingsPic}
+                  alt={"settings"}
+                />
+                <p>Settings</p>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        {width < 1251 && width > 840 ? (
+          <Search style={{ maxWidth: "100%", position: "relative" }} />
+        ) : null}
+      </div>
       <UserInfoBox>
         <div>
           <Link to={`/profiles/${userInfo.tag}`}>

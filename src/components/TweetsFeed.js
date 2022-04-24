@@ -17,6 +17,7 @@ import BarLoaderIcon from "./BarLoaderIcon";
 import { SecondaryLink, StyledLink } from "./styled/Links.styled";
 import placeholderProfilePic from "../images/placeholder.svg";
 import { RoundedImage } from "./styled/RoundedImage";
+import Button from "./Button";
 
 function TweetsFeed({ tweetData, isLoading }) {
   const [user] = useOutletContext();
@@ -55,14 +56,14 @@ function TweetsFeed({ tweetData, isLoading }) {
       return (
         <div style={{ padding: "20px", position: "relative" }} key={index}>
           {user.uid === tweet.author ? (
-            <button
+            <Button
               onClick={() => {
                 deleteTweet(tweet.author, tweet);
               }}
               style={{ position: "absolute", top: "5px", right: "5px" }}
             >
               Delete
-            </button>
+            </Button>
           ) : null}
           <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
             <RoundedImage

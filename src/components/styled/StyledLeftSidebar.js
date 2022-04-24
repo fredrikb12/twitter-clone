@@ -5,9 +5,8 @@ const StyledLeftSidebar = styled.header`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  width: 350px;
-  min-height: 100px;
-  padding: 20px;
+  height: 100vh;
+  padding: 20px 5px 50px;
 
   ul {
     padding: 0;
@@ -36,7 +35,7 @@ const StyledLeftSidebar = styled.header`
     background-color: #233648;
   }
 
-  @media (max-width: 950px) {
+  @media (max-width: 840px) {
     li p {
       display: none;
     }

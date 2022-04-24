@@ -19,7 +19,7 @@ import searchImg from "../images/search.svg";
 import { SearchButton } from "./styled/SearchButton.styled";
 import { CloseSearchButton, StyledSearch } from "./styled/Search.styled";
 
-function Search() {
+function Search({ style }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -82,13 +82,7 @@ function Search() {
   }
 
   return (
-    <div
-      style={{
-        marginBottom: "240px",
-        padding: "10px",
-        position: "relative",
-      }}
-    >
+    <div style={style}>
       <StyledSearch>
         <input
           placeholder={"Search"}
@@ -116,11 +110,12 @@ function Search() {
                 position: "absolute",
                 zIndex: "3",
                 backgroundColor: "#15202B",
-                width: "calc(100% - 20px)",
                 border: "1px solid #ababab",
                 borderTop: "none",
                 left: "10px",
                 padding: "15px 10px",
+                maxWidth: "400px",
+                minWidth: "300px",
               }
             : null
         }

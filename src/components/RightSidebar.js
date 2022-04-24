@@ -71,37 +71,51 @@ function RightSidebar({ user }) {
 
   return (
     <div>
-      <Search />
-      <h3>Suggested for you:</h3>
-      {suggestions
-        ? suggestions.map((item, index) => {
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  padding: "10px",
-                }}
-                key={index}
-              >
-                <RoundedImage
-                  style={{ width: "30px", height: "30px" }}
-                  src={item.photoURL}
-                  alt={`profile of ${item.displayName}`}
-                />
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <StyledLink to={`/profiles/${item.tag}`}>
-                    <p>{item.displayName}</p>
-                  </StyledLink>
-                  <SecondaryLink  to={`/profiles/${item.tag}`}>
-                    <p style={{ fontSize: "0.9rem" }}>@{item.tag}</p>
-                  </SecondaryLink>
+      <Search
+        style={{
+          marginBottom: "240px",
+          padding: "0px",
+          position: "relative",
+        }}
+      />
+      <div
+        style={{
+          borderRadius: "15px",
+          backgroundColor: "#233648",
+          padding: "10px",
+        }}
+      >
+        <h3>Suggested for you:</h3>
+        {suggestions
+          ? suggestions.map((item, index) => {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    padding: "10px",
+                  }}
+                  key={index}
+                >
+                  <RoundedImage
+                    style={{ width: "30px", height: "30px" }}
+                    src={item.photoURL}
+                    alt={`profile of ${item.displayName}`}
+                  />
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <StyledLink to={`/profiles/${item.tag}`}>
+                      <p>{item.displayName}</p>
+                    </StyledLink>
+                    <SecondaryLink to={`/profiles/${item.tag}`}>
+                      <p style={{ fontSize: "0.9rem" }}>@{item.tag}</p>
+                    </SecondaryLink>
+                  </div>
                 </div>
-              </div>
-            );
-          })
-        : null}
+              );
+            })
+          : null}
+      </div>
     </div>
   );
 }

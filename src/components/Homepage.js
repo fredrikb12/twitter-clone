@@ -2,7 +2,9 @@ import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { getDB } from "../firebase";
+import useWindowWidth from "../getWindowWidth";
 import CreateTweet from "./CreateTweet";
+import Search from "./Search";
 import SignOut from "./SignOut";
 import StyledFlexColContainer from "./styled/StyledFlexColContainer";
 import StyledFlexRowContainer from "./styled/StyledFlexRowContainer";
@@ -16,6 +18,7 @@ function Homepage() {
   const [user] = useOutletContext();
   const [tweets, setTweets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { width } = useWindowWidth();
 
   useEffect(() => {
     console.log("tweets: ", tweets);
@@ -60,6 +63,9 @@ function Homepage() {
   return (
     <>
       <div>
+        <div style={{ maxWidth: "100%", position: "relative" }}>
+          {width < 841 && <Search />}
+        </div>
         <CreateTweet />
       </div>
       <TweetsFeed tweetData={tweets} isLoading={isLoading} />
