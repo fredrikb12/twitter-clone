@@ -5,8 +5,7 @@ const borderColor = "#7d8c9b";
 const StyledMainContainer = styled.main`
   display: flex;
   flex-direction: column;
-  min-width: 250px;
-  max-width: 600px;
+  min-width: clamp(250px, 50vw, 600px);
   color: ${({ theme }) => theme.primaryText};
 
   & > div {
