@@ -33,10 +33,6 @@ function Settings() {
     return () => unsubscribe();
   }, [user]);
 
-  useEffect(() => {
-    //console.log(userInfo);
-  }, [userInfo]);
-
   function handleChange(e) {
     setUserInfo((prev) => {
       tagRef.current.style = "";

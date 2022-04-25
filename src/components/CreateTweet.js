@@ -1,16 +1,7 @@
-import {
-  addDoc,
-  arrayUnion,
-  collection,
-  doc,
-  serverTimestamp,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { getDB } from "../firebase";
-import placeholder from "../images/placeholder.svg";
 import StyledProfilePicture from "./styled/StyledProfilePicture";
 import StyledTweetForm from "./styled/StyledTweetForm";
 import uniqid from "uniqid";
@@ -26,19 +17,6 @@ function CreateTweet() {
 
   async function handleTweet(e) {
     e.preventDefault();
-    console.log(tweet);
-
-    /*const tweets = collection(`users/${user.uid}/tweets`);
-    console.log(tweets);
-    const userRef = doc(getDB(), "users", user.uid);*/
-
-    /*const tweetsRef = collection(getDB(), "tweets");
-    await addDoc(tweetsRef, {
-      text: tweet,
-      author: user.uid,
-      createdAt: serverTimestamp(),
-      photoURL: null,
-    });*/
 
     const userRef = doc(getDB(), "users", user.uid);
     await updateDoc(userRef, {
@@ -50,30 +28,6 @@ function CreateTweet() {
         id: uniqid(),
       }),
     });
-
-    /*await setDoc(doc(getDB(), "tweets"), {
-      text: tweet,
-      author: user.uid,
-      createdAt: serverTimestamp(),
-      photoURL: null,
-    });*/
-
-    /*await updateDoc(userRef, {
-      tweets: arrayUnion({
-        text: tweet,
-        author: user.uid,
-        createdAt: serverTimestamp(),
-        photoURL: null,
-      }),
-    });/*
-
-    /*await setDoc(doc(getDB(), "users", user.uid), {
-      text: tweet,
-      author: user.uid,
-      createdAt: serverTimestamp(),
-      photoURL: null,
-    });*/
-    console.log("tweet posted");
     setTweet(() => "");
   }
   return (
@@ -101,7 +55,7 @@ function CreateTweet() {
               borderRadius: "8px",
               color: "#cdcdcd",
               padding: "5px",
-              fontSize: "0.9rem"
+              fontSize: "0.9rem",
             }}
           />
         </div>

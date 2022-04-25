@@ -1,19 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getDB } from "../firebase";
-import {
-  collection,
-  doc,
-  getDoc,
-  limit,
-  orderBy,
-  query,
-  setDoc,
-  where,
-  whereField,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import BarLoaderIcon from "./BarLoaderIcon";
-import { Link } from "react-router-dom";
 import { SecondaryLink, StyledLink } from "./styled/Links.styled";
 import searchImg from "../images/search.svg";
 import { SearchButton } from "./styled/SearchButton.styled";
@@ -24,10 +12,6 @@ function Search({ style }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [displayResults, setDisplayResults] = useState(false);
-
-  useEffect(() => {
-    console.log(searchResults);
-  }, [searchResults]);
 
   function handleInput(e) {
     setSearchTerm(() => e.target.value);

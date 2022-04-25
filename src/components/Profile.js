@@ -5,7 +5,6 @@ import {
   arrayUnion,
   collection,
   doc,
-  getDoc,
   getDocs,
   onSnapshot,
   query,
@@ -72,51 +71,7 @@ function Profile() {
     });
 
     return () => unsubscribe();
-    /*async function loadUserTweets() {
-      const qSnap = await getDocs(q);
-
-      /* let data = [];
-
-      qSnap.forEach((doc) => {
-        const userData = doc.data();
-        setisFollowed(() => {
-          return userData.followers.includes(user.uid);
-        });
-        setUserInfo(() => {
-          return [
-            {
-              bio: userData.bio,
-              displayName: userData.displayName,
-              followersLength: userData.followers.length,
-              followers: userData.followers,
-              following: userData.following.length,
-              tweets: userData.tweets.length,
-              uid: userData.uid,
-            },
-          ];
-        });
-        const tweetData = doc
-          .data()
-          .tweets.map((tweet) => {
-            return {
-              ...tweet,
-              authorName: doc.data().displayName,
-              userName: doc.data().tag,
-            };
-          })
-          .sort((a, b) => {
-            return b.createdAt - a.createdAt;
-          });
-
-        data.push(...tweetData);
-      });
-
-      setTweets(() => {
-        return [...data];
-      });
-    }
-
-    loadUserTweets();*/
+    
   }, [user.uid, userTag]);
 
   useEffect(() => {

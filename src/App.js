@@ -25,9 +25,7 @@ import GlobalStyle from "./components/styled/GlobalStyle";
 
 function App() {
   const [user] = useAuthState(getAuth());
-
   const [blueTheme, setBlueTheme] = useState(true);
-
   const theme = {
     clr: {
       textPrimary: blueTheme ? "#f9f9f9" : "#c9e2f2",
@@ -40,16 +38,12 @@ function App() {
   };
 
   function initFirebaseAuth() {
-    //TODO: authStateObserver function
     onAuthStateChanged(getAuth(), async (user) => {
       if (user) {
         const db = getDB();
-        //const usersRef = collection(getDB(), "users");
-        // const q = query(usersRef, where("uid", "==", user.uid))
         const usersRef = doc(db, "users", user.uid);
         const usersSnap = await getDoc(usersRef);
-        if (usersSnap.exists()) {
-        } else {
+        if (!usersSnap.exists()) {
           await setDoc(doc(db, "users", user.uid), {
             displayName: user.displayName,
             photoURL: user.photoURL,
@@ -60,11 +54,7 @@ function App() {
             followers: [],
             bio: "",
           });
-          const data = await getDoc(usersRef);
-          console.log(data.data());
         }
-      } else {
-        console.log("no user");
       }
     });
   }
@@ -73,40 +63,6 @@ function App() {
     initFirebaseAuth();
   }, []);
 
-  // Triggers when the auth state change for instance when the user signs-in or signs-out.
-  function authStateObserver(user) {
-    console.log(user);
-    if (user) {
-      console.log(user, "is signed in");
-      // User is signed in!
-      // Get the signed-in user's profile pic and name.
-      /*var profilePicUrl = getProfilePicUrl();
-    var userName = getUserName();
-
-    // Set the user's profile pic and name.
-    userPicElement.style.backgroundImage = 'url(' + addSizeToGoogleProfilePic(profilePicUrl) + ')';
-    userNameElement.textContent = userName;
-
-    // Show user's profile and sign-out button.
-    userNameElement.removeAttribute('hidden');
-    userPicElement.removeAttribute('hidden');
-    signOutButtonElement.removeAttribute('hidden');
-
-    // Hide sign-in button.
-    signInButtonElement.setAttribute('hidden', 'true');
-
-    // We save the Firebase Messaging Device token and enable notifications.
-    saveMessagingDeviceToken();
-  } else { // User is signed out!
-    // Hide user's profile and sign-out button.
-    userNameElement.setAttribute('hidden', 'true');
-    userPicElement.setAttribute('hidden', 'true');
-    signOutButtonElement.setAttribute('hidden', 'true');
-
-    // Show sign-in button.
-    signInButtonElement.removeAttribute('hidden');*/
-    }
-  }
   if (user) {
     return (
       <ThemeProvider theme={theme}>

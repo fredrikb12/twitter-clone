@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react";
 import { getDB } from "../firebase";
 import {
   collection,
-  doc,
-  getDoc,
   limit,
   orderBy,
   query,
-  setDoc,
   where,
-  whereField,
   getDocs,
 } from "firebase/firestore";
-import { Link } from "react-router-dom";
 import Search from "./Search";
 import { SecondaryLink, StyledLink } from "./styled/Links.styled";
 import { RoundedImage } from "./styled/RoundedImage.js";
@@ -23,10 +18,6 @@ function RightSidebar({ user }) {
   useEffect(() => {
     setKey(() => user.uid);
   }, [user]);
-
-  useEffect(() => {
-    console.log(suggestions);
-  }, [suggestions]);
 
   useEffect(() => {
     async function loadSuggestions() {

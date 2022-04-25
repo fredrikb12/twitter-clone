@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import profilePic from "../images/profile.svg";
 import homePic from "../images/home.svg";
 import settingsPic from "../images/settings.svg";
-import { Link, NavLink, useOutletContext } from "react-router-dom";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { Link, NavLink } from "react-router-dom";
+import { doc, onSnapshot } from "firebase/firestore";
 import { getDB } from "../firebase";
 import StyledLeftSidebar from "./styled/StyledLeftSidebar";
 import SignOut from "./SignOut";
@@ -12,7 +12,6 @@ import { UserInfoBox } from "./styled/UserInfoBox.styled";
 import Circle3DSpinLoader from "./Circle3DSpinLoader";
 import useWindowWidth from "../getWindowWidth";
 import Search from "./Search";
-import LowWidthSearch from "./LowWidthSearch";
 
 function LeftSidebar({ user }) {
   const [userInfo, setUserInfo] = useState({});
@@ -24,20 +23,9 @@ function LeftSidebar({ user }) {
         return { ...doc.data() };
       });
     });
-    /* async function getUserInfo() {
-      const userRef = doc(getDB(), "users", user.uid);
-      const data = await getDoc(userRef);
-      setUserInfo(() => {
-        return { ...data.data() };
-      });
-    }
-    getUserInfo();*/
     return () => unsubscribe();
   }, [user]);
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
   return userInfo ? (
     <StyledLeftSidebar>
       <div>

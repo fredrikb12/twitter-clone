@@ -1,17 +1,6 @@
-import React, { useEffect } from "react";
-import { Link, useOutletContext } from "react-router-dom";
-import {
-  arrayRemove,
-  arrayUnion,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import React from "react";
+import { useOutletContext } from "react-router-dom";
+import { arrayRemove, doc, updateDoc } from "firebase/firestore";
 import { getDB } from "../firebase";
 import BarLoaderIcon from "./BarLoaderIcon";
 import { SecondaryLink, StyledLink } from "./styled/Links.styled";
@@ -21,19 +10,8 @@ import Button from "./Button";
 
 function TweetsFeed({ tweetData, isLoading }) {
   const [user] = useOutletContext();
-
-  /*useEffect(() => {
-    async function getUserNames() {
-      if (tweetData && tweetData[0] && tweetData[0].tweets) {
-        console.log(tweetData);
-      }
-    }
-    getUserNames();
-  }, [tweetData]);*/
-
   async function deleteTweet(userID, tweet) {
     const userRef = doc(getDB(), "users", userID);
-    const user = await getDoc(userRef);
 
     const tweetToRemove = {
       author: tweet.author,
@@ -43,9 +21,6 @@ function TweetsFeed({ tweetData, isLoading }) {
       text: tweet.text,
     };
 
-    console.log(user.data());
-    console.log(tweet);
-    //console.log(tweet);
     await updateDoc(userRef, {
       tweets: arrayRemove(tweetToRemove),
     });
