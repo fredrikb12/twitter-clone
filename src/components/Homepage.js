@@ -38,7 +38,7 @@ function Homepage() {
       setTweets(() => {
         return [...tweetData];
       });
-      setIsLoading(() => true);
+      setIsLoading(() => false);
     }
     loadTweets();
   }, [user.uid]);
