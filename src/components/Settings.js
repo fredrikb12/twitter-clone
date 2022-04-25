@@ -55,7 +55,6 @@ function Settings() {
 
     const usersRef = collection(getDB(), "users");
     const q = query(usersRef, where("tag", "==", data.tag));
-
     const qSnap = await getDocs(q);
 
     const docs = [];
@@ -64,12 +63,10 @@ function Settings() {
     });
     if (docs.length === 0) {
       await updateDoc(userRef, data);
-      console.log("updated");
     } else if (docs[0].uid !== user.uid) {
       const tag = tagRef.current;
       tag.style.borderColor = "red";
       tag.style.borderWidth = "2px";
-      tag.setCustomValidity("Tag is already taken.");
     }
   }
 
