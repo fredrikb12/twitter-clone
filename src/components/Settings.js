@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import {
   arrayRemove,
@@ -21,6 +21,7 @@ import Button from "./Button";
 function Settings() {
   const [user] = useOutletContext();
   const [userInfo, setUserInfo] = useState(null);
+  const tagRef = useRef();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(getDB(), "users", user.uid), (doc) => {
@@ -33,11 +34,12 @@ function Settings() {
   }, [user]);
 
   useEffect(() => {
-    console.log(userInfo);
+    //console.log(userInfo);
   }, [userInfo]);
 
   function handleChange(e) {
     setUserInfo((prev) => {
+      tagRef.current.style = "";
       const obj = { ...prev };
       const name = e.target.name;
       const value = e.target.value;
@@ -47,11 +49,28 @@ function Settings() {
     });
   }
 
-  async function submitInfo(e, field) {
+  async function submitInfo(e) {
     const userRef = doc(getDB(), "users", user.uid);
     const data = { ...userInfo };
-    await updateDoc(userRef, data);
-    console.log("updated");
+
+    const usersRef = collection(getDB(), "users");
+    const q = query(usersRef, where("tag", "==", data.tag));
+
+    const qSnap = await getDocs(q);
+
+    const docs = [];
+    qSnap.forEach((doc) => {
+      docs.push(doc.data());
+    });
+    if (docs.length === 0) {
+      await updateDoc(userRef, data);
+      console.log("updated");
+    } else if (docs[0].uid !== user.uid) {
+      const tag = tagRef.current;
+      tag.style.borderColor = "red";
+      tag.style.borderWidth = "2px";
+      tag.setCustomValidity("Tag is already taken.");
+    }
   }
 
   return userInfo ? (
@@ -66,9 +85,6 @@ function Settings() {
             value={userInfo.displayName}
           />
         </label>
-        <Button type="button" onClick={(e) => submitInfo(e, "displayName")}>
-          Submit Name
-        </Button>
       </div>
       <div>
         <label>
@@ -82,22 +98,26 @@ function Settings() {
             rows="4"
           />
         </label>
-        <Button type="button" onClick={(e) => submitInfo(e, "bio")}>
-          Submit Bio
-        </Button>
       </div>
       <div>
         <label>
           User Tag
           <input
+            ref={tagRef}
             type="text"
             name="tag"
             onChange={handleChange}
             value={userInfo.tag}
           />
         </label>
-        <Button type="button" onClick={(e) => submitInfo(e, "tag")}>
-          Submit tag
+        <Button
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            submitInfo(e);
+          }}
+        >
+          Submit changes
         </Button>
       </div>
     </StyledSettings>
