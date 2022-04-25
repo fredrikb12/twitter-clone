@@ -90,7 +90,7 @@ function CreateTweet() {
         <div>
           <textarea
             maxLength={280}
-            cols="40"
+            cols="38"
             rows="8"
             value={tweet}
             onChange={handleInput}
@@ -99,16 +99,15 @@ function CreateTweet() {
               border: "1px solid #ababab",
               resize: "none",
               borderRadius: "8px",
+              color: "#cdcdcd",
+              padding: "5px",
+              fontSize: "0.9rem"
             }}
           />
         </div>
       </div>
 
-      <Button
-        onClick={handleTweet}
-      >
-        Tweet
-      </Button>
+      <Button onClick={handleTweet}>Tweet</Button>
     </StyledTweetForm>
   );
 }
