@@ -135,6 +135,10 @@ function Profile() {
     await updateDoc(userRef, {
       followers: arrayUnion(user.uid),
     });
+    const currentUserRef = doc(getDB(), "users", user.uid);
+    await updateDoc(currentUserRef, {
+      following: arrayUnion(id),
+    });
   }
 
   async function unfollowUser(id) {
@@ -142,6 +146,10 @@ function Profile() {
     if (!userRef) return;
     await updateDoc(userRef, {
       followers: arrayRemove(user.uid),
+    });
+    const currentUserRef = doc(getDB(), "users", user.uid);
+    await updateDoc(currentUserRef, {
+      following: arrayRemove(id),
     });
   }
 
