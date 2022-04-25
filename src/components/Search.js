@@ -46,8 +46,8 @@ function Search({ style }) {
     displayItem = (
       <div style={{ padding: "10px 0px" }}>
         <p style={{ padding: "10px" }}>
-          No users were found. If you expected a result, try again with proper
-          casing, as results are case sensitive.
+          No users were found. If you expected a result, the results are case
+          sensitive.
         </p>
         <CloseSearchButton
           onClick={() => {
