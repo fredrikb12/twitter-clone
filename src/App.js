@@ -83,6 +83,7 @@ function App() {
   } else {
     return (
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <SignIn />
       </ThemeProvider>
     );
