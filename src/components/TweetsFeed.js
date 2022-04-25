@@ -80,8 +80,10 @@ function TweetsFeed({ tweetData, isLoading }) {
               <p style={{ fontSize: "0.9rem" }}>@{tweet.userName}</p>
             </SecondaryLink>
           </div>
-          <p style={{ padding: "6px 0" }}>{tweet.text}</p>
-          <p style={{ padding: "6px 0" }}>
+          <p style={{ padding: "12px 0" }}>{tweet.text}</p>
+          <p
+            style={{ padding: "3px 0", color: "#ababab", fontSize: "0.85rem" }}
+          >
             {`${convertSeconds(tweet.createdAt)}`}
           </p>
         </div>
