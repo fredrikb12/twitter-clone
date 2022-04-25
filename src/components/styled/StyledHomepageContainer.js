@@ -6,6 +6,9 @@ const StyledHomepageContainer = styled(StyledFlexRowContainer)`
   gap: 20px;
   flex: 1;
   color: ${({ theme }) => theme.clr.textPrimary};
+  @media (max-width: 550px) {
+    flex-direction: column;
+  }
 `;
 
 export default StyledHomepageContainer;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyledLeftSidebar = styled.header`
+  position: sticky;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -38,6 +39,15 @@ const StyledLeftSidebar = styled.header`
   @media (max-width: 840px) {
     li p {
       display: none;
+    }
+  }
+
+  @media (max-width: 550px) {
+    height: 120px;
+    flex-direction: row;
+
+    ul {
+      display: flex;
     }
   }
 `;
