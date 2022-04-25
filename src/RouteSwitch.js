@@ -6,7 +6,7 @@ import Settings from "./components/Settings";
 
 function RouteSwitch() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Homepage />} />
@@ -14,7 +14,7 @@ function RouteSwitch() {
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
