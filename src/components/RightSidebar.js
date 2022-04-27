@@ -61,7 +61,7 @@ function RightSidebar({ user }) {
   }, [user.uid, suggestions.length, key]);
 
   return (
-    <div>
+    <div style={{ position: "sticky", top: "20px" }}>
       <Search
         style={{
           marginBottom: "240px",

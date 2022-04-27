@@ -28,8 +28,8 @@ function LeftSidebar({ user }) {
 
   return userInfo ? (
     <StyledLeftSidebar>
-      <div>
-        <nav>
+      <div style={{ position: "sticky", top: "0px" }}>
+        <nav >
           <ul style={{ listStyle: "none" }}>
             <li>
               <NavLink

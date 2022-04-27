@@ -69,11 +69,11 @@ function App() {
         <GlobalStyle />
         <StyledHomepageContainer>
           <LeftSidebar user={user} />
-          <div>
+          <>
             <StyledMainContainer>
               {user && <Outlet context={[user]} />}
             </StyledMainContainer>
-          </div>
+          </>
           <StyledRightSidebar>
             <RightSidebar user={user} />
           </StyledRightSidebar>

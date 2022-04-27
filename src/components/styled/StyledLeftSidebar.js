@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 const StyledLeftSidebar = styled.header`
   position: sticky;
+  top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   height: 100vh;
-  padding: 20px 5px 50px;
+  padding: 0px 5px 50px;
 
   ul {
     padding: 0;
