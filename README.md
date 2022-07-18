@@ -12,9 +12,9 @@ You may find project specifications and other details on the [project page](http
 
 ## Features
 
-- Multiple stages to choose from.
-- Leaderboards for each stage, and the ability to submit after finishing.
-- Persistent data stored in Firestore.
+- Google authentication / sign-in
+- Create and delete tweets.
+- Follow and unfollow users, in order for their posts to show up on the homepage.
 
 ## Live demo
 
