@@ -21,6 +21,10 @@ const StyledMainContainer = styled.main`
   & > div:last-child {
     border-bottom: 1px solid ${borderColor};
   }
+
+  @media (max-width: 500px) {
+    padding: 0 10px;
+  }
 `;
 
 export default StyledMainContainer;

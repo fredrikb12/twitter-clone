@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../Button";
 
 export const StyledButton = styled.button`
   padding: 8px 20px;
@@ -11,5 +12,17 @@ export const StyledButton = styled.button`
   &:hover {
     cursor: pointer;
     background-color: #35618d;
+  }
+`;
+
+export const StyledDeleteButton = styled(StyledButton)`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  @media (max-width: 700px) {
+    right: 5px;
+    bottom: 5px;
+    top: auto;
   }
 `;

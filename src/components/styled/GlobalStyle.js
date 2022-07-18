@@ -50,6 +50,26 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme }) => theme.clr.background};
   }
+
+  ::-webkit-scrollbar {
+  width: 6px;
+  
+}
+::-webkit-scrollbar-track {
+  background: ${({ theme }) => theme.main};
+  width: 10px;
+  padding: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.4);
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.4);
+  
+}
+::-webkit-scrollbar-thumb {
+  background: ${({ theme }) => theme.clr.textSecondary};
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: ${({ theme }) => theme.clr.buttonBg};
+}
 `;
 
 export default GlobalStyle;

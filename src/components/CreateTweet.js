@@ -44,7 +44,7 @@ function CreateTweet() {
         <div>
           <textarea
             maxLength={280}
-            cols="38"
+            cols="25"
             rows="8"
             value={tweet}
             onChange={handleInput}

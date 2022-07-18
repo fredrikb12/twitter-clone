@@ -20,6 +20,13 @@ const StyledTweetForm = styled.form`
       position: static;
     }
   }
+
+  @media (max-width: 500px) {
+    img {
+      display: none;
+      visibility: hidden;
+    }
+  }
 `;
 
 export default StyledTweetForm;

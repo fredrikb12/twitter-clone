@@ -44,9 +44,13 @@ const StyledLeftSidebar = styled.header`
   }
 
   @media (max-width: 550px) {
+    top: 0;
     height: 120px;
     flex-direction: row;
-
+    z-index: 100;
+    background-color: ${({ theme }) => theme.clr.background};
+    border-bottom: 1px solid ${({ theme }) => theme.clr.buttonText};
+    box-shadow: 0 2px 4px 5px rgba(0, 0, 0, 0.4);
     ul {
       display: flex;
     }
