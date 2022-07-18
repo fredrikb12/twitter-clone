@@ -18,7 +18,9 @@ You may find project specifications and other details on the [project page](http
 
 ## Live demo
 
-Go to the [deployed project](https://fredrikb12.github.io/twitter-clone/) to try it out! \* _Currently only supports Google sign-in_
+Go to the [deployed project](https://fredrikb12.github.io/twitter-clone/) to try it out! 
+
+\* _Currently only supports Google sign-in_
 
 ## Possible improvements
 
