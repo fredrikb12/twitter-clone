@@ -3,20 +3,15 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Outlet } from "react-router-dom";
 import SignIn from "./components/SignIn";
-import SignOut from "./components/SignOut";
 import uniqid from "uniqid";
 import {
-  collection,
   doc,
   getDoc,
-  query,
   setDoc,
-  where,
 } from "firebase/firestore";
 import { getDB } from "./firebase";
 import StyledMainContainer from "./components/styled/StyledMainContainer";
 import StyledHomepageContainer from "./components/styled/StyledHomepageContainer";
-import StyledLeftSidebar from "./components/styled/StyledLeftSidebar";
 import StyledRightSidebar from "./components/styled/StyledRightSidebar";
 import RightSidebar from "./components/RightSidebar";
 import LeftSidebar from "./components/LeftSidebar";

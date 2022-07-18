@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import {
-  arrayRemove,
-  arrayUnion,
   collection,
   doc,
-  getDoc,
   getDocs,
   onSnapshot,
   query,
@@ -13,7 +10,6 @@ import {
   where,
 } from "firebase/firestore";
 import { getDB } from "../firebase";
-import { RoundedImage } from "./styled/RoundedImage";
 import BarLoaderIcon from "./BarLoaderIcon";
 import { StyledSettings } from "./styled/Settings.styled";
 import Button from "./Button";

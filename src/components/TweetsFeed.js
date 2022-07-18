@@ -6,8 +6,7 @@ import BarLoaderIcon from "./BarLoaderIcon";
 import { SecondaryLink, StyledLink } from "./styled/Links.styled";
 import placeholderProfilePic from "../images/placeholder.svg";
 import { RoundedImage } from "./styled/RoundedImage";
-import Button, { DeleteButton } from "./Button";
-import { StyledDeleteButton } from "./styled/Button.styled";
+import { DeleteButton } from "./Button";
 
 function TweetsFeed({ tweetData, isLoading }) {
   const [user] = useOutletContext();
